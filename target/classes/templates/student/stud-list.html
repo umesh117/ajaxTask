@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th ="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>First</title>
+    <link rel="stylesheet" th:href="@{/static/css/demo.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+
+
+        <h3>Student List</h3>
+        <hr>
+        <a href="#exampleModal" data-toggle="modal" class="btn btn-outline-primary">Add Student</a>
+            <table border="1" class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email Address</th>
+                        <th>Username</th>
+                        <th>Profile Picture</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="tempStudent:${studentlist}">
+                        <td th:text="${tempStudent.fname}"/>
+                        <td th:text="${tempStudent.lname}"/>
+                        <td th:text="${tempStudent.email}"/>
+                        <td th:text="${tempStudent.username}"/>
+                        <td><img th:src="@{'/images/'+${tempStudent.profilePic}}" th:height="100" th:width="100"/></td>
+                        <td><a th:href="@{/stud_api/updatestudent (studentID=${tempStudent.std_id}) }" class="btn btn-outline-primary">Update</a>
+                            <a th:href="@{/stud_api/deletestudent(studentID=${tempStudent.std_id}) }" class="btn btn-outline-primary">Delete</a></td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+</div>
+</body>
+
+
+<!-- Modal  Student Registraion form-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form action="#" th:action="@{/stud_api/save}" enctype="multipart/form-data" th:object="${student1}" method="POST" class="container">
+                        <input class="form-control" type="hidden" th:field="*{std_id}" >
+                        <input class="form-control" type="text" th:field="*{fname}" placeholder="First Name" >
+                            <span th:if="${#fields.hasErrors('fname')}" th:errors="*{fname}"
+                                  class="text-danger"></span>
+                        <br/><br/>
+
+                        <input class="form-control" type="text" th:field="*{lname}" placeholder="Last Name">
+                            <span th:if="${#fields.hasErrors('lname')}" th:errors="*{lname}"
+                                  class="text-danger"></span>
+                    <br/><br/>
+
+                        <input class="form-control" type="text" th:field="*{email}" placeholder="Email Address">
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                                  class="text-danger"></span>
+                    <br/><br/>
+                    <input type="file" class="form-control" name="profile"/>
+
+                    <br/><br/>
+                        <input class="form-control" type="text" th:field="*{username}" placeholder="Username">
+                            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+                                  class="text-danger"></span>
+                    <br/><br/>
+                        <input class="form-control" type="password" th:field="*{password}" placeholder="Password">
+                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                                  class="text-danger"></span>
+                    <br/><br/>
+
+            <div class="modal-footer">
+                <button class="btn btn-outline-primary" type="submit">Save</button>
+            </div>
+            </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</html>

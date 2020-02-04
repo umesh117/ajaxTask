@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th ="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>First</title>
+    <link rel="stylesheet" th:href="@{'/css/demo.css'}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script th:src="@{'/js/ajax1.js'}"></script>
+    <!--<script th:src="@{'/js/ajax2.js'}"></script>-->
+    <script th:src="@{'/js/ajax3.js'}"></script>
+    <script th:src="@{'/js/ajax4.js'}"></script>
+</head>
+<body>
+<div class="container">
+
+
+    <h3>Student List</h3>
+    <hr>
+    <a href="#exampleModal" id="addStudent" data-toggle="modal" class="btn btn-outline-primary">Add Student</a>
+    <table border="1" class="table table-bordered table-striped" id="studentListTable">
+        <thead class="thead-dark">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email Address</th>
+            <th>Username</th>
+            <th>Profile Picture</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody id="stdBody">
+        </tbody>
+
+    </table>
+
+</div>
+<!-- Modal  Student Registraion form-->
+<div class="modal fade" id="exampleModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">User Registration Form</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form id="studentForm" enctype="multipart/form-data" th:object="${student1}" method="POST" class="container">
+                    <input class="form-control" type="hidden" th:field="*{std_id}" id="IDstd_id" name="std_id" >
+                    <input class="form-control" type="text" th:field="*{fname}" placeholder="First Name"  id="IDfname" name="fname">
+                    <span  class="text-danger" id="errorfname"></span>
+                    <br/><br/>
+
+                    <input class="form-control" type="text" th:field="*{lname}" placeholder="Last Name" id="IDlname" name="lname">
+                    <span class="text-danger" id="errorlname"></span>
+                    <br/><br/>
+
+                    <input class="form-control" type="text" th:field="*{email}" placeholder="Email Address" id="IDemail" name="email">
+                    <span class="text-danger" id="erroremail"></span>
+                    <br/><br/>
+
+                    <input type="file" class="form-control" name="profile" id="IDfile"/>
+
+                    <br/><br/>
+                    <input class="form-control" type="text" th:field="*{username}" placeholder="Username" id="IDusername" name="username">
+                    <span class="text-danger" id="errorusername"></span>
+                    <br/><br/>
+                    <input class="form-control" type="password" th:field="*{password}" placeholder="Password" id="IDpassword" name="password">
+                    <span class="text-danger" id="errorpassword"></span>
+                    <br/><br/>
+                    <span class="text-success" id="SuccessFlag"></span>
+                    <br/><br/>
+                    <div class="modal-footer">
+                        <table><tr>
+                            <td>
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" >Close</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-primary" type="submit" id="saveSubmit">Save</button>
+                            </td>
+                        </tr>
+                            </table>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

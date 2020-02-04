@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th ="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>First</title>
+    <link rel="stylesheet" th:href="@{/css/demo.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body>
+<center>
+    <form action="#" th:action="@{/stud_api/save}" th:object="${student1}" method="POST" class="container">
+        <table cellspacing="10px" cellpadding="10px">
+            <tr><td><input class="form-control" type="hidden" th:field="*{std_id}" ></td></tr>
+            <tr><td><input class="form-control" type="text" th:field="*{fname}" placeholder="First Name" >
+                <span th:if="${#fields.hasErrors('fname')}" th:errors="*{fname}"
+                      class="text-danger"></span>
+
+            </td></tr>
+            <tr><td><input class="form-control" type="text" th:field="*{lname}" placeholder="Last Name">
+                <span th:if="${#fields.hasErrors('lname')}" th:errors="*{lname}"
+                      class="text-danger"></span>
+            </td></tr>
+            <tr><td><input class="form-control" type="text" th:field="*{email}" placeholder="Email Address">
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                      class="text-danger"></span>
+            </td></tr>
+            <tr><td><input class="form-control" type="text" th:field="*{username}" placeholder="Username">
+                <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+                      class="text-danger"></span>
+            </td></tr>
+            <tr><td><input class="form-control" type="password" th:field="*{password}" placeholder="Password">
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                      class="text-danger"></span>
+            </td></tr>
+            <tr><td><button class="btn btn-outline-primary" type="submit">Save</button></td></tr>
+        </table>
+        <hr>
+        <a th:href="@{/stud_api/student}">Back to employee List</a>
+    </form>
+</center>
+</body>
+</html>
