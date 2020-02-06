@@ -83,7 +83,7 @@ public class RestControllerStudent {
         return response;
     }
 
-    @PutMapping("/ajaxupdateStudent")
+    @PostMapping("/ajaxupdateStudent")
     public AjaxResponseBody updateStudent(@RequestParam("profile") MultipartFile[] file, @Valid @ModelAttribute Student student, BindingResult bindingResult){
 
         AjaxResponseBody response=new AjaxResponseBody();
@@ -101,9 +101,9 @@ public class RestControllerStudent {
             //for file upload
             String filename=file[0].getOriginalFilename();
             String path=System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images";
-            System.out.println(Paths.get(path+"\\"+filename));
+            System.out.println(Paths.get(path+"\\"+filename)+"*****");
             int num=0;
-            while(Files.exists(Paths.get(path+num+"\\"+filename))){
+            while(Files.exists(Paths.get(path+"\\"+num+filename))){
                 ++num;
             }
             filename=num+filename;
