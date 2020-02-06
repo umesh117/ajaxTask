@@ -1,6 +1,29 @@
 /*both insert and update request is handled by this*/
+
+var ajaxInsert=function (id) {
+    $("#SuccessFlag").html("");
+    $("#IDstd_id").val(id);
+    $("#IDfname").val("");
+    $("#IDlname").val("");
+    $("#IDemail").val("");
+    $("#IDusername").val("");
+
+    $("#errorfname").html("");
+    $("#errorlname").html("");
+    $("#erroremail").html("");
+    $("#errorusername").html("");
+    $("#errorpassword").html("");
+
+/*    $("button#saveSubmit").click(function (event) {
+        var formElement=document.getElementById("studentForm");
+        var formdata=new FormData(formElement);
+        event.preventDefault();
+        fire_ajax_submit(formdata,id);
+    });*/
+}
+
 var ajaxUpdate = function(id) {
-    $("#SuccessFlag").val("");
+    $("#SuccessFlag").html("");
     console.log(id);
     var std_id=id;
     var fname=$("#"+"fname"+id).html();
@@ -16,6 +39,12 @@ var ajaxUpdate = function(id) {
     $("#IDemail").val(email);
     $("#IDusername").val(username);
 
+    $("#errorfname").html("");
+    $("#errorlname").html("");
+    $("#erroremail").html("");
+    $("#errorusername").html("");
+    $("#errorpassword").html("");
+
     $("button#saveSubmit").click(function (event) {
         var formElement=document.getElementById("studentForm");
         var formdata=new FormData(formElement);
@@ -27,7 +56,7 @@ var ajaxUpdate = function(id) {
 function fire_ajax_submit(formData,id) {
     console.log(formData);
     $.ajax({
-        type: "PUT",
+        type: "POST",
         url: "/ajaxupdateStudent",
         enctype: 'multipart/form-data',
         processData: false,
@@ -44,13 +73,11 @@ function fire_ajax_submit(formData,id) {
             $("#errorpassword").html("");
             if (response.validated) {
                 console.log(response);
-                $("#IDstd_id").val(0);
-                $("#IDfname").val("");
-                $("#IDlname").val("");
-                $("#IDfile").val("");
-                $("#IDemail").val("");
-                $("#IDusername").val("");
-                $("#IDpassword").val("");
+
+                $('#exampleModal').on('hidden.bs.modal', function () {
+                    $(this).find('form').trigger('reset');
+                    $("#IDstd_id").val(0);
+                });
                 $("#SuccessFlag").append("Data submitted successfully!");
                 /*close the model*/
                 if(id==response.student.std_id){
@@ -66,7 +93,7 @@ function fire_ajax_submit(formData,id) {
                         "<td id='lname"+response.student.std_id+"'>"+response.student.lname+"</td>"+
                         "<td id='email"+response.student.std_id+"'>"+response.student.email+"</td>"+
                         "<td id='username"+response.student.std_id+"'>"+response.student.username+"</td>"+
-                        "<td><img id='img"+response.student.std_id+"' src=/images/"+response.student.std_id+" height='100' width='100'/></td>"+
+                        "<td><img id='img"+response.student.std_id+"' src=/images/"+response.student.profilePic+" height='100' width='100'/></td>"+
                         "<td><a href='#exampleModal' data-toggle='modal' class='btn btn-outline-primary'onclick='ajaxUpdate("+response.student.std_id+");' id='update"+response.student.std_id+"'>Update</a>"+
                         "<button type='button' class='btn btn-outline-primary' onclick='ajaxDelete("+response.student.std_id+");'>DELETE</button>"+"</td>"+
                         "<td hidden>"+response.student.std_id+"</td>"+

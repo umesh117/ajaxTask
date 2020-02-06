@@ -1,14 +1,18 @@
 /*Insert request is handled by ajax3.js*/
 
 $(document).ready(function () {
-        $("button#addStudent").click(function (event) {
-            $("#SuccessFlag").val("");
-            var formElement=document.getElementById("studentForm");
-            console.log(formElement);
-            var formdata=new FormData(formElement);
-            event.preventDefault();
-            fire_ajax_submit(formdata);
+    $("button#addStudent").click(function (event) {
+        console.log("inserting data");
+        $('#exampleModal').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+            $("#IDstd_id").val(0);
         });
+        var formElement = document.getElementById("studentForm");
+        console.log(formElement);
+        var formdata = new FormData(formElement);
+        event.preventDefault();
+        fire_ajax_submit(formdata);
+    });
 });
 
 function fire_ajax_submit(formData) {

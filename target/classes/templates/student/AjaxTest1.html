@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script th:src="@{'/js/ajax1.js'}"></script>
-    <!--<script th:src="@{'/js/ajax2.js'}"></script>-->
+    <script th:src="@{'/js/ajax2.js'}"></script>
     <script th:src="@{'/js/ajax3.js'}"></script>
     <script th:src="@{'/js/ajax4.js'}"></script>
 </head>
@@ -22,7 +22,7 @@
 
     <h3>Student List</h3>
     <hr>
-    <a href="#exampleModal" id="addStudent" data-toggle="modal" class="btn btn-outline-primary">Add Student</a>
+    <a href="#exampleModal" id="addStudent" data-toggle="modal" class="btn btn-outline-primary" onclick="ajaxInsert(0)">Add Student</a>
     <table border="1" class="table table-bordered table-striped" id="studentListTable">
         <thead class="thead-dark">
         <tr>
